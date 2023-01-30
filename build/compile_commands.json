@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/Levim/Documents/Codes/Wifi IA/build",
+  "command": "C:/msys64/mingw64/bin/gcc.exe  @CMakeFiles/Wifi_Management.dir/includes_C.rsp -g -o CMakeFiles/Wifi_Management.dir/main.c.obj -c \"C:/Users/Levim/Documents/Codes/Wifi IA/main.c\"",
+  "file": "C:/Users/Levim/Documents/Codes/Wifi IA/main.c"
+}
+]
