@@ -8,7 +8,8 @@ typedef char *string;
 struct Device devices[100];
 
 //File Location
-const char *fileName = "C:/Users/Levim/Documents/Address.csv";
+const char *CSVfileName = "C:/Users/Levim/Documents/Address.csv";
+const char *TXTfileName = "C:/Users/Levim/Documents/Active.txt";
 
 //Active Devices
 unsigned int activeDevices = 0;
@@ -41,25 +42,51 @@ void clearprint(){
     }
 }
 
+
+//Get Active Devices
+int getActiveDevices(const char *fileName, string active[], int *count){
+    FILE *fp = fopen(fileName, "r");
+    if (fp == NULL) {
+        perror("Error opening file");
+        return 1;
+    }
+
+    char line[1024];
+    int i = 0;
+    //Read each line of the file
+    while (fgets(line, 1024, fp) != NULL) {
+        active[i] = strdup(line);
+        i++;
+    }
+    *count = i;
+
+    //remove the new line character
+    for(int i = 0; i < *count; i++){
+        active[i][strlen(active[i]) - 1] = '\0';
+    }
+
+
+    fclose(fp);
+    return 0;
+}
+
 //Main function
 int main(){
 
-    //Test Assignment
+    /*Test Assignment
     activeDevices = 4;
     activeDevice[0] = "258.174.890";
     activeDevice[1] = "189.255.041";
     activeDevice[2] = "867.058.394";
     activeDevice[3] = "33.557.256.0";
+    */
 
+    
 
-    //Read CSV file
-    int count = 0;
-    readCSV(fileName, devices, &count);
-
-    //Print out the devices
+    /*Print out the devices
     for (int i = 0; i < count; i++) {
         printf("Device %d: %s, %s, %s", i, devices[i].mac, devices[i].FName, devices[i].LName);
-    }
+    }*/
     int tett;
 
     
@@ -67,6 +94,14 @@ int main(){
     //Main Loop
     while (true) {
         tett += 1;
+
+        //Read CSV file
+        int count = 0;
+        readCSV(CSVfileName, devices, &count);
+
+
+        //Get the active devices
+        getActiveDevices(TXTfileName, activeDevice, &activeDevices);
 
         //Get the active devices names
         for (int i = 0; i < activeDevices; i++) {

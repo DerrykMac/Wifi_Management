@@ -16,7 +16,6 @@ void readCSV(const char *fileName, struct Device devices[], int *count) {
     char line[1024];
     int i = 0;
     while (fgets(line, 1024, fp) != NULL) {
-        printf("Line %d: %s", i, line);
         char *token = strtok(line, ",");
         devices[i].mac = strdup(token);
         token = strtok(NULL, ",");
